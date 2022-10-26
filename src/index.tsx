@@ -1,19 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { PrivateSimulator } from "./privateSimulator";
+import { PublicSimulator } from "./publicSimulator";
+import "./index.css";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import packageJson from "../package.json";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+interface RenderComponentMethodInput {
+  targetHtmlElement: HTMLElement;
+  contextValues?: Record<string, any>;
+}
+
+const renderComponent =
+  (Component: React.ElementType) =>
+  ({ targetHtmlElement, contextValues }: RenderComponentMethodInput) => {
+    if (targetHtmlElement) {
+      console.log(
+        `Render react widget in "${targetHtmlElement.tagName}" tag element.`
+      );
+      const node = ReactDOM.createRoot(targetHtmlElement);
+
+      const props = contextValues || {};
+
+      node.render(
+        <React.StrictMode>
+          <Component {...props} />
+        </React.StrictMode>
+      );
+    } else {
+      console.error(`The "targetHtmlElement" arg passed is not valid!!!`);
+    }
+  };
+
+export const api = {
+  loadPrivateSimulator: renderComponent(PrivateSimulator),
+  loadPublicSimulator: renderComponent(PublicSimulator),
+  version: packageJson.version,
+};
+
+// init("root");
