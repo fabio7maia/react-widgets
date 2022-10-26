@@ -14,7 +14,7 @@ module.exports = {
               ...webpackConfig.output,
               path: __dirname + "/fakecdn/assets/[fullhash]",
               publicPath:
-                "https://github.com/fabio7maia/react-widgets/blob/main/fakecdn/assets/[fullhash]/",
+                "https://raw.githubusercontent.com//fabio7maia/react-widgets/blob/main/fakecdn/assets/[fullhash]/",
               filename: "react-widgets.js",
               // path: path.resolve(__dirname, "dist"),
               library: {
