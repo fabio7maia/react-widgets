@@ -12,8 +12,9 @@ module.exports = {
             ...webpackConfig,
             output: {
               ...webpackConfig.output,
-              path: __dirname + "/build/cdn/assets/[fullhash]",
-              publicPath: "https://cdn.example.com/assets/[fullhash]/",
+              path: __dirname + "/fakecdn/assets/[fullhash]",
+              publicPath:
+                "https://github.com/fabio7maia/react-widgets/blob/main/fakecdn/assets/[fullhash]/",
               filename: "react-widgets.js",
               // path: path.resolve(__dirname, "dist"),
               library: {
