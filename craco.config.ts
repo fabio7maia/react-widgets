@@ -1,5 +1,4 @@
-import path from "path";
-import {} from "@craco/craco";
+import packageJson from "./package.json";
 
 module.exports = {
   webpack: {
@@ -10,17 +9,18 @@ module.exports = {
       return env === "production"
         ? {
             ...webpackConfig,
+            devtool: undefined,
             output: {
-              ...webpackConfig.output,
-              path: __dirname + "/fakecdn/assets/[fullhash]",
-              publicPath:
-                "https://fabio7maia.github.io/react-widgets/fakecdn/assets/[fullhash]/",
-              filename: "react-widgets.js",
+              path:
+                __dirname + `/fakecdn/assets/${packageJson.version}-[fullhash]`,
+              publicPath: `https://fabio7maia.github.io/react-widgets/fakecdn/assets/${packageJson.version}-[fullhash]/`,
+              filename: "static/js/[name].[contenthash:8].js",
               // path: path.resolve(__dirname, "dist"),
               library: {
                 type: "umd",
                 name: "ReactWidgets",
               },
+              clean: true,
             },
             externals: {
               react: "React", // Case matters here
