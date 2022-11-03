@@ -38,4 +38,9 @@ export const api = {
   version: packageJson.version,
 };
 
-// init("root");
+// const targetHtmlElement = document.getElementById("root");
+
+// targetHtmlElement &&
+//   api.loadPublicSimulator({
+//     targetHtmlElement,
+//   });
